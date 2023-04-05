@@ -56,7 +56,7 @@ h3 {
     width:90%;
     height:220px;
     background-color: blue;
-    overflow: hidden; /* 영역 이외의 부분은 숨기기 */
+    overflow: hidden; /*영역 이외의 부분은 숨기기*/
     margin:0 auto;
   }
 
