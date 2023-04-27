@@ -50,7 +50,7 @@ h3 {
     font: 20px 'LAB디지털', sans-serif;
     margin-top: 20px;
 }
-.col-xs-12 {
+#mydiv {
     position: relative;
     left: 80px;
     width:90%;

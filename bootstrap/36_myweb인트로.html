@@ -6,11 +6,61 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="layout.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="moment-with-locales.min.js"></script>
-    <link rel="stylesheet" href="layout.css">
+    <script>
+      
+      let ctnt = []
+      ctnt[0] = "<img src='evening-shining-stars-background-wallpaper-1920x1200_6.jpg' class='image-thumbnail'>"
+      ctnt[1] = "<img src='milky_way_galaxy-Space_Universe_Photography_Wallpaper_1366x768.jpg' class='image-thumbnail'>"
+      ctnt[2] = "<img src='sailboat-floating-in-space-wallpaper-1920x1200_6.jpg' class='image-thumbnail'>"
+      ctnt[3] = "<img src='the_heaven-wallpaper-1920x1080.jpg' class='image-thumbnail'>"
+      ctnt[4] = "<img src='evening-shining-stars-background-wallpaper-1920x1200_6.jpg' class='image-thumbnail'>"
+      ctnt[5] = "<img src='milky_way_galaxy-Space_Universe_Photography_Wallpaper_1366x768.jpg' class='image-thumbnail'>"
+      ctnt[6] = "<img src='sailboat-floating-in-space-wallpaper-1920x1200_6.jpg' class='image-thumbnail'>"
+      ctnt[7] = "<img src='the_heaven-wallpaper-1920x1080.jpg' class='image-thumbnail'>"
+      
+      let timer; // scroll 함수를 실행시키면 setTimeout 함수의 상태가 저장되고, killtime 함수를 실행시키면 clearTimeout() 함수가 작동되어 setTimeout 함수를 중지함
+      const scroll = () => {
+        // 이미지 8장을 동시에 왼쪽여백 조정하기
+        for (let i=0; i<ctnt.length; i++) {
+          let tmp = $(`#area${i}`).css('left')
+          tmp = parseInt(tmp) - 1 + "px" // 몇 px 씩 움직일지 결정
+          // 이미지 순환을 위해서 이미지 재배치
+          if (tmp === "-380px") {
+            tmp = "2660px"
+          }
+          $(`#area${i}`).css('left', tmp)
+        }
+        // 스크롤 속도 -> 이미지를 -1px 씩 몇초마다 옮길지
+        timer = setTimeout(scroll,15)
+      }
+      
+      // ctnt에 저장된 이미지를 id=mydiv에 배치
+      const start = () => {
+        for(let i=0; i<ctnt.length; i++) {
+          $('#mydiv').append(
+            $(`<div id='area${i}' style='position:absolute; top:0; left:${380*i}px'>`)
+            .append($(ctnt[i]))
+          )
+        }
+            // 페이지 시작 시 스크롤함수 시작 시간 설정
+            setTimeout(scroll, 0)
+      }
+          
+      $(document).ready(()=>{
+        const showtime = () => {
+          let fullDate = moment().format('YYYY MMM DD ddd h:mm:ss a')
+          $('h3').text(fullDate)
+        }
+        showtime()
+        setInterval(showtime,1000)
+        start()
+      })
+    </script>
 </head>
     <body>
 
@@ -46,9 +96,7 @@
     <!-- Second Container -->
     <div class="container-fluid bg-3 text-center">    
       <div class="row">
-        <div class="col-xs-12">
-          <!-- 본문 시작 -->
-          여기에 본문 내용 작성
+        <div id="mydiv" class="col-xs-12">
         </div>
       </div>
     </div>
@@ -57,14 +105,5 @@
     <footer class="container-fluid bg-4 text-center">
         Copyright &copy; 2023 MyWeb
     </footer>
-
-    <script>
-      const showtime = () => {
-          let fullDate = moment().format('YYYY MMM DD ddd h:mm:ss a')
-          $('h3').text(fullDate)
-      }
-      showtime()
-      setInterval(showtime,1000)
-    </script>
-</body>
+    </body>
 </html>
